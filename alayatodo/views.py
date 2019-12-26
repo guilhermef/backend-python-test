@@ -81,7 +81,11 @@ def todo(id):
 @bp.route('/todo/', methods=['GET'])
 @login_required
 def todos():
-    return render_template('todos.html', todos=g.user.todos)
+    pagination = Todo.query.filter_by(user=g.user).paginate(
+        page=int(request.args.get('page', '1')),
+        per_page=5,
+    )
+    return render_template('todos.html', pagination=pagination)
 
 
 @bp.route('/todo', methods=['POST'])
