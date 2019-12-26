@@ -1,4 +1,4 @@
-all: setup migrate-db
+all: setup migrate-db create-fixtures
 
 setup:
 	@pip install -r requirements.txt
@@ -6,5 +6,8 @@ setup:
 migrate-db:
 	@python main.py initdb
 
+create-fixtures:
+	@python main.py fixtures
+
 run:
-	@python main.py
+	@FLASK_ENV=development python main.py run

@@ -15,7 +15,7 @@
                 <td>{{ todo.id }}</td>
                 <td>{{ todo.user_id }}</td>
                 <td>
-                    <a href="{{ url_for('todo', id=todo.id) }}">
+                    <a href="{{ url_for('routes.todo', id=todo.id) }}">
                        {{ todo.description }}
                     </a>
                 </td>
@@ -26,20 +26,20 @@
                 </td>
                 <td>
                     {% if not todo.completed %}
-                        <form method="POST" action="{{ url_for('todo_complete', id=todo.id) }}">
+                        <form method="POST" action="{{ url_for('routes.todo_complete', id=todo.id) }}">
                             <button type="submit" class="btn btn-xs btn-success"><p>Mark as completed</p></button>
                         </form>
                     {% endif %}
                 </td>
                 <td>
-                    <form method="POST" action="{{ url_for('todo_delete', id=todo.id) }}">
+                    <form method="POST" action="{{ url_for('routes.todo_delete', id=todo.id) }}">
                         <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove glyphicon-white"></span></button>
                     </form>
                 </td>
             </tr>
         {% endfor %}
         <tr>
-            <form method="post" action="{{ url_for('todos_POST') }}">
+            <form method="post" action="{{ url_for('routes.todos_POST') }}">
                 <td colspan="5">
                     <input type="textbox" name="description" class="small-6 small-center" placeholder="Description...">
                 </td>
