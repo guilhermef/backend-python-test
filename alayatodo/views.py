@@ -41,11 +41,14 @@ def logout():
     session.pop('user', None)
     return redirect('/')
 
-
+@app.route('/todo/<id>/json', methods=['GET'])
 @app.route('/todo/<id>', methods=['GET'])
 def todo(id):
     cur = g.db.execute("SELECT * FROM todos WHERE id ='%s'" % id)
     todo = cur.fetchone()
+    if request.url.endswith("/json"):
+        keys = todo.keys()
+        return {k:todo[keys.index(k)] for k in keys}
     return render_template('todo.html', todo=todo)
 
 
